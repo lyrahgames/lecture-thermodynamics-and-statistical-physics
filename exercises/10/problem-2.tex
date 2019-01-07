@@ -1,0 +1,21 @@
+\subsection*{Aufgabe 2} % (fold)
+\label{sub:aufgabe_2}
+
+	Sei $n\in\SN$ mit $n>1$.
+	Sei weiterhin \D{Z=(1,2,\ldots,n)} eine Zerlegung von $[1,n]$.
+	Die Funktion $\ln n!$ ist monoton steigend und positiv für alle $n\in\SN$ mit $n\geq 1$.
+	Es gilt nach Gesetzen des Logarithmus
+	\[ \ln n! = \sum_{i=1}^{n}\ln{i} \]
+	Daraus folgt dann durch Betrachtung der Ober- und Untersummen
+	\[ \integral{1}{n}{\ln x}{x} \ \leq \ \sum_{i=1}^n \ln i \ \leq \ \integral{1}{n+1}{\ln x}{x} \]
+	Rückumformung und Anwendung des Hauptsatzes der Integral- und Differentialrechnung resultiert dann in
+	\begin{alignat}{6}
+		&&n\ln n - n+1 \ \leq && \centermathcell{\ln n!} &\leq \ (n+1)\ln(n+1) -n \nonumber \\
+		\Rightarrow &&\ln n -\frac{n-1}{n} \ \leq &&\centermathcell{\frac{\ln n!}{n}} &\leq \ \frac{n+1}{n}\ln(n+1) - 1 \nonumber \\
+		\Rightarrow &&\underbrace{-\frac{n-1}{n}}_{\mathclap{\longrightarrow -1,\ n \longrightarrow \infty}} \ \leq &&\centermathcell{\ \frac{\ln n!}{n} - \ln n} \ &\leq \ \underbrace{\frac{n+1}{n}\ln(n+1) -\ln n - 1}_{\mathclap{= \ln\frac{n+1}{n} + \frac{\ln(n+1)}{n} - 1 \longrightarrow -1,\ n \longrightarrow \infty}} \nonumber
+	\end{alignat}
+	Nach dem Sandwich-Theorem für Folgen folgt also
+	\[ \frac{\ln n!}{n} - \ln n  \longrightarrow -1,\ n \longrightarrow \infty \]
+	\qed
+
+% subsection aufgabe_2 (end)

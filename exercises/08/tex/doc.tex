@@ -1,0 +1,165 @@
+\begin{document}
+	
+	\section*{\centering Thermodynamik - Übung 08} % (fold)
+	\label{sec:thermodynamik_bung_07}
+	
+		\subsection*{Aufgabe 1} % (fold)
+		\label{sub:aufgabe_1}
+		
+			Es gilt nach Voraussetzungen für die innere Energie $E$ und den Druck $p$ eines Photonengases:
+			\begin{alignat}{3}
+				\label{energie def}
+				E&:\SRP\times\SRP\longrightarrow\SRP, \qquad &E(T,V)&:=\sigma VT^4 \\
+				\label{druck def}
+				p&:\SRP\times\SRP\longrightarrow\SRP, \qquad &p(T,V)&:=\dfrac{1}{3}\dfrac{E(T,V)}{V}=\dfrac{1}{3}\sigma T^4
+			\end{alignat}
+			Weiterhin gelten die bereits bewiesenen Folgerungen aus der Gibbsschen Fundamentalgleichung für die Entropie \D{ S:\SRP\times\SRP\longrightarrow\SRP } für alle $T,V \in \SRP$:
+			\begin{align}
+				\label{gibbs 1}
+				\curvb{ \partial_T E }_V(T,V) &= T\curvb{ \partial_T S }_V(T,V) \\
+				\label{gibbs 2}
+				\curvb{ \partial_V E }_T(T,V) &= T\curvb{ \partial_V S }_T(T,V) - p(T,V) 
+			\end{align}
+			Aufgrund von Gleichung (\ref{gibbs 1}) lässt sich nun Folgendes sagen:
+			\begin{alignat*}{3}
+				\Rightarrow&& \ T\curvb{ \partial_T S }_V(T,V) &\overset{(\ref{energie def})}{=} 4\sigma VT^3 \\
+				\Rightarrow&& \ \curvb{ \partial_T S }_V(T,V) &= 4\sigma VT^2 \\
+				\Rightarrow&& \ S(T,V) &= \dfrac{4}{3}\sigma VT^3 + C(V)
+			\end{alignat*}
+			Dabei ist $C(V)$ die entstehende Integrationskonstante, welche je nach $V$ unterschiedlich sein kann. 
+			Zur Bestimmung der Funktion $C$ wird nun Gleichung (\ref{gibbs 2}) verwendet:
+			\begin{alignat*}{3}
+				\Rightarrow&& \ \curvb{ \partial_V S }_T(T,V) &= \dfrac{1}{T}\boxb{ \curvb{ \partial_V E }_T(T,V) + p(T,V) } \\
+				&&\textit{((\ref{energie def}), (\ref{druck def}))} \qquad &= \dfrac{1}{T}\boxb{ \sigma T^4 + \dfrac{1}{3}\sigma T^4 } \\
+				&& &= \dfrac{4}{3}\sigma T^3 \\
+				&&\textit{(siehe oben)} \qquad &\overset{!}{=} \dfrac{4}{3}\sigma T^3 + C^\prime(V) \\
+				\Rightarrow&& \ C^\prime(V) &= 0 \\
+				\Rightarrow&& \ C(V) &= S_0
+			\end{alignat*}
+			Für die Entropie folgt damit:
+			\begin{equation}
+				\label{entropie}
+				S(T,V) = \dfrac{4}{3}\sigma VT^3 + S_0
+			\end{equation}
+			Im Allgemeinen befindet sich das betrachtete thermodynamische System im Gleichgewicht.
+			Damit ist es ohne Einschränkungen erlaubt, $S_0 = 0$ zu setzen.
+			\begin{alignat}{3}
+				\Rightarrow&& \ T(S,V) &= \curvb{ \dfrac{3S}{4\sigma V} }^{\frac{1}{3}} \nonumber \\
+				\label{energie pot}
+				\Rightarrow&& \ E(S,V) &= E(T(S,V),V) = \sigma V\curvb{ \dfrac{3S}{4\sigma V} }^{\frac{4}{3}}
+			\end{alignat}
+			Es wurden hier keine weiteren Abbildungen für $E$ und $T$ eingeführt, um die neuen Abhängigkeiten zu definieren.
+			Das totale Differential für die freie Energie \D{F:\SRP\times\SRP\longrightarrow\SRP} lautet:
+			\begin{equation}
+				\label{freie energie diff}
+				\diff F(T,V) = -S(T,V)\ \diff T - p(T,V)\ \diff V
+			\end{equation}
+			Für die partielle Ableitung nach $T$ muss also folgen:
+			\begin{alignat}{3}
+				\overset{(\ref{freie energie diff})}{\Rightarrow}&& \ \curvb{\partial_T F}_V(T,V) &= -S(T,V) \overset{(\ref{entropie})}{=} -\dfrac{4}{3}\sigma VT^3 \nonumber \\
+				\Rightarrow&& \ F(T,V) &= -\dfrac{1}{3}\sigma VT^4 + K(V)
+			\end{alignat}
+			Analog dazu lässt sich die Ableitung nach $V$ betrachten:
+			\begin{alignat}{3}
+				\overset{(\ref{freie energie diff})}{\Rightarrow}&& \ \curvb{\partial_V F}_T(T,V) &= -p(T,V) \overset{(\ref{druck def})}{=} -\dfrac{1}{3}\sigma T^4 \nonumber \\
+				&& &\overset{!}{=} -\dfrac{1}{3}\sigma T^4 + K^\prime(V) \nonumber \\
+				\Rightarrow&& \ K^\prime(V) &= 0 \nonumber \\
+				\Rightarrow&& \ K(V) &= F_0 \overset{o.E.}{=} 0 \nonumber \\
+				\label{freie energie pot}
+				\Rightarrow&& \ F(T,V) &= -\dfrac{1}{3}\sigma VT^4
+			\end{alignat}
+			Nun soll das totale Differential der Enthalpie \D{H:\SRP\times\SRP\longrightarrow\SRP} betrachtet werden.
+			\begin{equation}
+				\label{enthalpie diff}
+				\diff H(S,p) = T(S,p)\ \diff S + V(S,p)\ \diff p
+			\end{equation}
+			Nach Definition (\ref{druck def}) kann direkt gezeigt werden:
+			\begin{equation*}
+				T(S,p) = \tilde{T}(p) = \curvb{ \dfrac{3p}{\sigma} }^{\frac{1}{4}}
+			\end{equation*}
+			\begin{alignat}{3}
+				\overset{(\ref{entropie})}{\Rightarrow}&& \ V(S,p) &= \dfrac{3S}{4\sigma (T(S,p))^3} = \dfrac{3S}{4\sigma \curvb{ \dfrac{3p}{\sigma} }^{\frac{3}{4}}} \nonumber \\
+				\overset{(\ref{enthalpie diff})}{\Rightarrow}&& \ \curvb{ \partial_S H }_p(S,p) &= T(S,p) \nonumber \\
+				\Rightarrow&& \ H(S,p) &= \curvb{\dfrac{3p}{\sigma}}^{\frac{1}{4}}S + C(p) \nonumber \\
+				\overset{(\ref{enthalpie diff})}{\Rightarrow}&& \ \curvb{ \partial_p H }_S(S,p) &= \dfrac{3S}{4\sigma \curvb{ \dfrac{3p}{\sigma} }^{\frac{3}{4}}} \nonumber \\
+				&& &\overset{!}{=} \dfrac{3S}{4\sigma \curvb{ \dfrac{3p}{\sigma} }^{\frac{3}{4}}} + C^\prime(p) \nonumber \\
+				\Rightarrow&& \ C^\prime(p) &= 0 \nonumber \\
+				\Rightarrow&& \ C(p) &= H_0 \overset{o.E.}{=} 0 \nonumber \\
+				\label{freie energie pot}
+				\Rightarrow&& \ H(S,p) &= \curvb{\dfrac{3p}{\sigma}}^{\frac{1}{4}}S
+			\end{alignat}
+			Für die freie Enthalpie gilt nun:
+			\begin{alignat}{3}
+				\label{freie enthalpie diff}
+				\diff G(p,T) &= -S(p,T)\ \diff T + V(p,T)\ \diff p \\
+				&\overset{(\ref{druck def}), (\ref{entropie})}{=} -\dfrac{4pV(p,T)}{T}\ \diff T + V(p,T)\boxb{ \dfrac{4p}{T} \ \diff T } \nonumber \\
+				&= 0 \nonumber \\
+				\label{freie enthalpie pot}
+				\Rightarrow G(p,T) &= G_0 \overset{o.E.}{=} 0
+			\end{alignat}
+			Damit folgt für das chemische Potential wegen \D{ \mu = \curvb{ \partial_n G }_{p,T} } direkt:
+			\begin{equation}
+				\label{chemisches pot}
+				\mu = 0
+			\end{equation}
+
+		% subsection aufgabe_1 (end)
+
+		\newpage
+
+		\subsection*{Aufgabe 2} % (fold)
+		\label{sub:aufgabe_2}
+		
+			Die Zustandsgleichung eines idealen Gases in einem Raumbereich \D{ G \subset \SR^3 } lässt sich wie folgt durch Funktionen-Arithmetik ausdrücken:
+			\begin{equation}
+				\label{zustand p}
+				p = \dfrac{R}{M}\varrho T
+			\end{equation}
+			Dabei beschreibt $p$ den Druck und $\varrho$ die Dichte in einem Punkt \D{\vec{r} \in G}.
+			$R$ und $M$ bezeichnen die Gaskonstante und die molare Masse.
+			Für dieses thermodynamische System lässt sich nun die Eulergleichung in der eulerschen Beschreibungsweise formulieren, wenn $v$ die Geschwindigkeit und $\vec{f}$ die Kraftdichte im einem Punkt \D{ \vec{r} \in G } bezeichnet:
+			\begin{equation}
+				\label{eulergleichung}
+				\varrho \boxb{ \partial_t \vec{v} + \curvb{ \vec{v}\cdot\nabla }\vec{v} } = -\nabla p + \vec{f}
+			\end{equation}
+			Die Kraftdichte beschreibt hier gerade das von außen angelegte Gravitationsfeld.
+			Es muss hier gelten, wobei $g$ die Schwerebeschleunigung darstellt:
+			\begin{equation}
+				\label{kraftdichte}
+				\vec{f} = -g\varrho\vec{e}_z
+			\end{equation}
+			Befindet sich das betrachtete System nun in einem thermischen Gleichgewicht, so gilt aufgrund der Definition dessen \D{T = \text{const}} im Raumbereich $G$.
+			Weiterhin dürfen sich während eines Gleichgewichtzustandes die Zustandsgrößen nicht in Abhängigkeit der Zeit ändern.
+			Dies bedeutet aber auch, dass $\vec{v}=0$ gelten muss, da sonst $\varrho$ variieren würde.
+			Es folgt daher folgende Differentialgleichung:
+			\begin{equation}
+				\label{dgl}
+				\nabla p + g\varrho\vec{e}_z = 0
+			\end{equation}
+			Durch Nutzen von Gleichung (\ref{zustand p}) erhält man nun die folgenden gewöhnlichen Differentialgleichungen erster Ordnung:
+			\begin{align}
+				\partial_x p &= 0 \\
+				\partial_y p &= 0 \\
+				\partial_z p + \dfrac{Mg}{RT}p &= 0
+			\end{align}
+			$p$ hängt also weder von $x$ noch von $y$ ab.
+			Die Lösung der letzten Gleichung ist bekannt (durch Trennung der Variablen):
+			\begin{equation}
+				p(x,y,z) = p_0\exp\curvb{ -\dfrac{Mg}{RT}z }
+			\end{equation}
+			Dabei ist $p_0\in\SRP$ die entstehende Integrationskonstante.
+
+		% subsection aufgabe_2 (end)
+
+		\newpage
+
+		\subsection*{Aufgabe 3} % (fold)
+		\label{sub:aufgabe_3}
+		
+			
+
+		% subsection aufgabe_3 (end)
+
+	% section thermodynamik_bung_07 (end)
+
+\end{document}

@@ -1,0 +1,238 @@
+% documentclass: article used for scientific journals, short reports, program documentation, etc
+% options: fontsize 11, generate document for double sided printing, a4-paper
+\documentclass[10pt, twoside, a4paper]{article}
+
+% package for changing page layout
+\usepackage{geometry}
+\geometry{a4paper, lmargin=40mm, rmargin=45mm, tmargin=40mm, bmargin=45mm}
+% set indentation
+\setlength{\parindent}{5mm} 
+
+% package for changing page layout (used to indent whole paragraphs)
+\usepackage{changepage}
+
+% input encoding for special characters (e.g. ä,ü,ö,ß), only for non english text
+% options: utf8 as encoding standard
+\usepackage[utf8]{inputenc}
+% package for changing used language
+% options: german or default: english
+\usepackage[german]{babel}
+
+% package for font encoding
+\usepackage[T1]{fontenc}
+% package for times font
+% \usepackage{times}
+% package for latin modern fonts
+\usepackage{lmodern}
+
+% package for math symbols, functions and environments from ams(american mathematical society)
+\usepackage{amsmath, mathtools}
+% \usepackage{mathtools}
+% package for extended symbols from ams
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+% package for extended symbols from stmaryrd(st mary road)
+\usepackage{stmaryrd}
+% package for managing pictures
+\usepackage{graphicx}
+%package for positioning figures
+\usepackage{float}
+% package for changing color of font and paper
+% options: using names of default colors (e.g red, black)
+% \usepackage[usenames]{color}
+\usepackage[dvipsnames]{xcolor}
+
+% package for customising captions
+\usepackage[footnotesize, hang]{caption}
+
+% package for creating framed, shaded, or differently highlighted regions that can break across pages; environments: framed, oframed, shaded, shaded*, snugshade, snugshade*, leftbar, titled-frame
+\usepackage{framed}
+
+% unnumerated definition environment definiton
+\newenvironment{definition*}[2]{
+    \begin{framed}
+    \noindent
+    { \fontfamily{ptm}\selectfont \textsc{\textbf{#1:}} } ~ #2 
+    \par \hfill\\ 
+    \fontfamily{lmr}\selectfont \itshape
+}{
+    \end{framed}
+}
+% definitions for numerated definition environment
+\newcounter{definition}[section]
+\newcommand*{\definitionnum}{\thesection.\arabic{definition}}
+\newenvironment{definition}[2]{
+    \refstepcounter{definition}
+    \begin{definition*}{#1 \definitionnum}{#2}
+}{
+    \end{definition*}
+}
+
+% unnumerated theorem environment definition
+\newenvironment{theorem*}[2]{
+    \begin{leftbar}
+    \noindent
+    { \fontfamily{ptm}\selectfont \textbf{\textsc{#1}:}} ~ #2 
+    \par \hfill\\ 
+    \fontfamily{lmr} \fontshape{it} \selectfont
+}{ 
+    \end{leftbar}
+}
+% definitions for numerated theorem environment
+\newcounter{theorem}[section]
+\newcommand*\theoremnum{\thesection.\arabic{theorem}}
+\renewcommand\thetheorem{\theoremnum}
+\newenvironment{theorem}[2]{
+    \refstepcounter{theorem}
+    \begin{theorem*}{#1 \theoremnum}{#2}
+}{
+    \end{theorem*}
+}
+
+% change enumeration style of equations
+% \renewcommand\theequation{\thesection.\arabic{equation}}
+
+% q.e.d. definition
+\newcommand{\qed}{ \par \hfill \fontfamily{lmr} \fontshape{it} \selectfont \mbox{q.e.d.} \\}
+\newcommand{\qedbox}{ \par \hfill $\Box$ \\ }
+
+% proof environment definition for theorems
+\newenvironment{proof}{
+    \par \hfill\\
+    \noindent
+    { \fontfamily{ptm}\selectfont \textsc{Beweis:}} 
+    \normalfont
+    \small
+    \begin{adjustwidth}{8mm}{} 
+}{ 
+    \end{adjustwidth} 
+    \qed
+}
+
+
+% new displaymath command, so that equations will not be stretched
+\newcommand{\D}[1]{\mbox{$ #1 $}}
+% make unnumerated equation
+\newcommand{\E}[1]{\[ #1 \]}
+% command for set/family
+\newcommand{\set}[1]{\left{ #1 \right}}
+% command for box brackets
+\newcommand{\boxb}[1]{\left[ #1 \right]}
+% command for parentheses/curved brackets
+\newcommand{\curvb}[1]{\left( #1 \right)}
+% command for angle brackets
+\newcommand{\angleb}[1]{\left\langle #1 \right\rangle}
+%
+\newcommand{\diff}{\mathrm{d}}
+% mathematical definitions (standard sets)
+\newcommand{\SR}{\mathbb{R}}
+\newcommand{\SRP}{\SR^+}
+\newcommand{\SRPN}{\SRP_0}
+\newcommand{\SN}{\mathbb{N}}
+\newcommand{\SNN}{\mathbb{N}_0}
+\newcommand{\SZ}{\mathbb{Z}}
+\newcommand{\SQ}{\mathbb{Q}}
+\newcommand{\SQP}{\mathbb{Q}^+}
+\newcommand{\SQPN}{\mathbb{Q}^+_0}
+
+
+% package for init listings(non-formatted  text) e.g. different source codes
+\usepackage{listings}
+% declaring new caption format for listings
+\DeclareCaptionFormat{listing}{
+    \par\framebox[\textwidth]{ {\bfseries #1#2} \hfill \itshape #3 }
+    \vspace{-0.9\baselineskip}
+}
+\captionsetup[lstlisting]{format=listing, singlelinecheck=off}
+\definecolor{codeDarkGray}{gray}{0.2}
+
+\newcounter{lstlistingnum}[section]
+% style definition for standard code listings
+\lstdefinestyle{std}{
+    belowcaptionskip=0.5\baselineskip,
+    breaklines=true,
+    frame=tB,
+    xleftmargin=0mm,
+    showstringspaces=false,
+    basicstyle= \footnotesize\ttfamily,
+    keywordstyle= \color{codeDarkGray}\bfseries,
+    commentstyle= \itshape\color{gray},
+    identifierstyle=\color{codeDarkGray},
+    stringstyle=\color{codeDarkGray},
+    numberstyle=\scriptsize\ttfamily,
+    numbers=left,
+    captionpos=t,
+    tabsize=4
+}
+% command for standard code listings (unnumerated)
+\newcommand{\inputcodes}[3][Listing]{
+    \renewcommand{\thelstlisting}{}
+    \renewcommand{\lstlistingname}{#1}
+    \lstinputlisting[style=std, #2]{#3}
+}
+% command for standard code listings (numerated)
+\newcommand{\inputcode}[3][Listing]{
+    \refstepcounter{lstlistingnum}
+    \renewcommand{\thelstlisting}{\thesection.\arabic{lstlistingnum}}
+    \renewcommand{\lstlistingname}{#1}
+    \lstinputlisting[style=std, #2]{#3}
+}
+% command for c++ code listings in color
+\newcommand{\inputcppc}[3][Quelltext]{
+    \inputcode[#1]{language=C++, morekeywords = {__global__, __kernel__}, keywordstyle = \bfseries\color{MidnightBlue}, stringstyle=\color{BurntOrange}, caption = #2}{#3}
+}
+\newcommand{\inputcppcs}[3][Quelltext]{
+    \inputcodes[#1]{language=C++, morekeywords = {__global__, __kernel__}, keywordstyle = \bfseries\color{MidnightBlue}, stringstyle=\color{BurntOrange}, caption = #2}{#3}
+}
+% command for c++ code listings in grayscale
+\newcommand{\inputcpp}[3][Quelltext]{
+    \inputcode[#1]{language=C++, morekeywords={__global__, __kernel__}, caption = #2}{#3}
+}
+\newcommand{\inputcpps}[3][Quelltext]{
+    \inputcodes[#1]{language=C++, morekeywords={__global__, __kernel__}, caption = #2}{#3}
+}
+
+
+% package for including csv-tables from file
+% \usepackage{csvsimple}
+% package for creating, loading and manipulating databases
+\usepackage{datatool}
+
+% package for converting eps-files to pdf-files and then include them
+\usepackage{epstopdf}
+% use another program (ps2pdf) for converting
+% !!! important: set shell_escape=1 in /etc/texmf/texmf.cnf (Linux/Ubuntu 12.04) for allowing to use other programs
+% !!!            or use the command line with -shell-escape
+\epstopdfDeclareGraphicsRule{.eps}{pdf}{.pdf}{
+ps2pdf -dEPSCrop #1 \OutputFile
+}
+
+
+% package for reference to last page (output number of last page)
+\usepackage{lastpage}
+% package for using header and footer
+% options: automate terms of right and left marks
+\usepackage[automark]{scrpage2}
+% \setlength{\headheight}{4\baselineskip}
+% set style for footer and header
+\pagestyle{scrheadings}
+% \pagestyle{headings}
+% clear pagestyle for redefining
+\clearscrheadfoot
+% set header and footer: use <xx>head/foot[]{Text} (i...inner, o...outer, c...center, o...odd, e...even, l...left, r...right)
+\ihead[]{Thermodynamik - Übung 08 \\ Übung: Mo 10-12}
+\ohead[]{Markus Pawellek \\ 144645}
+\cfoot[]{\newline\newline\newline\pagemark}
+% use that for mark to last page: \pageref{LastPage}
+% set header separation line
+\setheadsepline[\textwidth]{0.5pt}
+% set foot separation line
+\setfootsepline[\textwidth]{0.5pt}
+
+
+\title{Thermodynamik - Übung 08}
+\author{Markus Pawellek}
+% \date{}
+
+
+\input{doc.tex}

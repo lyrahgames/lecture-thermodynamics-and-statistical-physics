@@ -1,0 +1,131 @@
+\subsection*{Aufgabe 1} % (fold)
+\label{sub:aufgabe_1}
+
+	Sei $n\in\SN$ mit $n\geq 2$ die betrachtete Dimension des Raumes.
+	Sei dann die allgemeine Koordinatentransformation von Kugelkoordinaten auf kartesische Koordinaten definiert durch
+	\footnote{
+		Die Idee hierfür kommt durch eine induktive Verallgemeinerung von zwei- und dreidimensionalen Kugelkoordinaten, die hier nicht erklärt werden soll.
+		(Sie steht in etwas längerer Form an meinem Whiteboard.)
+	}
+	\[ \Phi^{n}:[0,\infty)\times[-\pi,\pi]\times\left[-\frac{\pi}{2},\frac{\pi}{2}\right]^{n-2}\longrightarrow \SR^n \]
+	\begin{alignat}{3}
+		&x_i:=\Phi^{n}_i (r,\alpha_1,\ldots,\alpha_{n-1}) &&:= r\sin \alpha_{i-1} &&\prod_{k=i}^{n-1} \cos \alpha_k \quad \textit{für alle } k\in\curlb{2,\ldots,n} \nonumber \\
+		&x_1:=\Phi^{n}_1 (r,\alpha_1,\ldots,\alpha_{n-1}) &&:= r\cos \alpha_{1} &&\prod_{k=2}^{n-1} \cos \alpha_k \nonumber
+	\end{alignat}
+	Die Koordinatentransformation führt den Winkel $\vartheta$ der dreidimensionalen Kugelkoordinaten anders ein, als bekannt.
+	Er wird hier um $\pi/2$ verschoben, um so einen einfacheren induktiven Vorgang zu ermöglichen.
+	Die angegebenen Funktionen lassen sich außer auf einer Lebesgue-Nullmenge umkehren.
+	Dabei entstehen durch Umformung die Gleichungen
+	\begin{alignat}{2}
+		r &= \sqrt{\sum_{i=1}^n x_i^2} \nonumber \\
+		\alpha_i &= \arcsin\curvb{ \frac{x_{i+1}}{\sqrt{\sum_{k=1}^{i+1} x_k^2}} } \quad \textit{für alle } k\in\curlb{2,\ldots,n} \nonumber \\
+		\alpha_1 &= 
+			\begin{cases}
+				\arcsin\curvb{ \frac{x_2}{\sqrt{ x_1^2 + x_2^2 }} } & :x_1 > 0 \\ 
+				\arccos\curvb{ \frac{x_2}{\sqrt{ x_1^2 + x_2^2 }} } + \dfrac{\pi}{2} & :x_1 < 0,\, x_2 > 0 \\
+				\arccos\curvb{ \frac{-x_2}{\sqrt{ x_1^2 + x_2^2 }} } -\dfrac{\pi}{2} & :x_1 < 0,\, x_2 < 0 
+			\end{cases}
+		\nonumber
+	\end{alignat}
+	Dies lässt sich durch vollständige Induktion nachweisen.
+	Um nun die Integration über diese Koordinaten zu ermöglichen, muss die Determinante der Jacobi-Matrix von $\Phi^n$ berechnet werden.
+	Dazu muss als erstes die Jacobi-Matrix dargestellt werden.
+	Verwendet man ein ähnliches induktives Vorgehen, kommt man für alle $n\in\SN, n\geq2$ zu
+	\[
+		\Diff\Phi^{n+1}(\ldots) = 
+		\left(
+		\begin{array}{c|c}
+			\cos\alpha_n\cdot\Diff\Phi^n(\ldots) 
+			& 
+			\begin{array}{c}
+				-r\sin\alpha_n\cdot\Diff\Phi_{11}^n(\ldots) \\
+				\vdots \\
+				-r\sin\alpha_n\cdot\Diff\Phi_{n1}^n(\ldots) \\
+			\end{array}\\
+			\hline
+			\begin{array}{rrrr}
+				\sin\alpha_n & 0 & \cdots & 0 \\
+			\end{array} 
+			& 
+			r\cos\alpha_n
+		\end{array}
+		\right)
+	\]
+	Entwickelt man nun die Determinante nach der letzten Zeile (dies ist naheliegend, da hier nur zwei Terme vorkommen, welche ungleich sind) folgt
+	\begin{alignat}{2}
+		\det \Diff\Phi^{n+1}(\ldots) = &(-1)^n\, r \cos\alpha_n \cdot \cos^{n}\alpha_n \, \det\Diff\Phi^n(\ldots) \nonumber \\
+		& + \sin\alpha_n \cdot (-1)^{n-1} \, (-r) \, \sin\alpha_n \, \cos^{n-1}\alpha_n \, \det\Diff\Phi^n(\ldots) \nonumber
+	\end{alignat}
+	Für den zweiten Summanden wurde die rechte Spalte der Untermatrix zirkulär nach links vertauscht.
+	So entsteht ein $(-1)^{n-1}$.
+	Sowohl für die eine als auch die andere Untermatrix wurde der Satz zur Berechnung einer Determinanten, deren Spalten mit verschiedenen Skalaren multipliziert wurden, verwendet.
+	So entstehen die Vorfaktoren $\cos^{n}\alpha_n$ und $(-r)\,\sin\alpha_n \, \cos^{n-1}\alpha_n$.
+	Weiteres Umformen ergibt dann die Rekursionsformel der Determinanten und ein Rekursionsbeginn für $n = 2$, sodass für alle $n\in\SN, n\geq2$ gilt
+	\begin{alignat}{2}
+		&\det \Diff\Phi^{n+1}(\ldots) &&= (-1)^n \ r \ \cos^{n-1}\alpha_n \ \det\Diff\Phi^n(\ldots) \nonumber \\
+		&\det \Diff\Phi^{2}(\ldots) &&= r \nonumber
+	\end{alignat}
+	Die Lösung der Rekursionsformel erfolgt durch Entwickeln und vollständige Induktion (dies wird hier nicht ausgeführt).
+	Es folgt dann direkt
+	\[
+		\abs{ \det\Diff\Phi^{n}(\ldots) } = r^{n-1} \ \prod_{i=1}^{n-2} \cos^i\alpha_{i+1}
+	\]
+	Seien nun $B_R := \set{ x \in \SR^n }{ \norm{x} \leq R }$ für ein $R\in[0,\infty)$, $\lambda$ das Lebesgue-Maß und $\sigma$ das Oberflächenmaß.
+	Dann gilt nach dem Satz über Koordinatentransformationen und dem Satz von Fubini/Tonelli
+	\begin{alignat}{2}
+		V := \lambda(B_R) = \integral{B_R}{}{}{\lambda} &= \int_0^R \int_{-\pi}^\pi \int_{-\pi/2}^{\pi/2}\cdots\int_{-\pi/2}^{\pi/2} \abs{ \det\Diff\Phi^{n}(\ldots) } \, \diff\alpha_{n-1}\cdots\diff\alpha_1\diff r \nonumber \\
+		&= \dfrac{2\pi}{n}R^n \prod_{j=1}^{n-2} \integral{-\pi/2}{\pi/2}{\cos^j\alpha}{\alpha} \nonumber \\
+		A := \sigma(B_R) = \integral{B_R}{}{}{\sigma} &= \int_{-\pi}^\pi \int_{-\pi/2}^{\pi/2}\cdots\int_{-\pi/2}^{\pi/2} \abs{ \det\Diff\Phi^{n}(R,\ldots) } \, \diff\alpha_{n-1}\cdots\diff\alpha_1 \nonumber \\
+		&= 2\pi R^{n-1} \prod_{j=1}^{n-2} \integral{-\pi/2}{\pi/2}{\cos^j\alpha}{\alpha} \nonumber
+	\end{alignat}
+	Weiterhin gilt im Allgemeinen folgende Rekursionsformel für alle $n\in\SN, n>2$
+	\[ \integral{-\pi/2}{\pi/2}{\cos^n\alpha}{\alpha} = \dfrac{n-1}{n} \integral{-\pi/2}{\pi/2}{\cos^{n-2}\alpha}{\alpha} \]
+	Es folgt dann für alle $k\in\SN$
+	\begin{alignat}{3}
+		&\integral{-\pi/2}{\pi/2}{\cos^{2k}\alpha}{\alpha} &&= \dfrac{\pi}{2} &&\prod_{m=1}^{k-1} \dfrac{2m+1}{2(m+1)} \nonumber \\
+		&\integral{-\pi/2}{\pi/2}{\cos^{2k-1}\alpha}{\alpha} &&= 2 &&\prod_{m=1}^{k-1} \dfrac{2m}{2m+1} \nonumber \\
+		&\integral{-\pi/2}{\pi/2}{\cos\alpha}{\alpha} &&= 2 \nonumber \\
+		&\integral{-\pi/2}{\pi/2}{\cos^{2}\alpha}{\alpha} &&= \dfrac{\pi}{2} \nonumber
+	\end{alignat}
+
+	\paragraph{Fall $n=2k-1$ für ein $k\in\SN$:}
+	\begin{alignat}{2}
+		&\prod_{j=1}^{n-2} \integral{-\pi/2}{\pi/2}{\cos^j\alpha}{\alpha} \nonumber \\
+		&= \integral{-\pi/2}{\pi/2}{\cos^{2k-3}\alpha}{\alpha} \boxb{ \prod_{m=1}^{k-2} \integral{-\pi/2}{\pi/2}{\cos^{2m-1}\alpha}{\alpha} \integral{-\pi/2}{\pi/2}{\cos^{2m}\alpha}{\alpha} } \nonumber \\ 
+		&= 2 \boxb{ \prod_{m=1}^{k-2} \dfrac{2m}{2m+1} } \boxb{ \prod_{m=1}^{k-2} \pi \prod_{j=1}^{m-1} \dfrac{2j}{2j+1}\dfrac{2j+1}{2(j+1)} } \nonumber \\
+		&= 2^{k-1}\pi^{k-2} \boxb{ \prod_{m=1}^{k-2} \dfrac{m}{2m+1} } \cdot \dfrac{1}{(k-2)!} \nonumber \\
+		&= 2^{k-1}\pi^{k-2} \prod_{m=1}^{k-2} \dfrac{1}{2m+1} \nonumber
+	\end{alignat}
+
+	\paragraph{Fall $n=2k$ für ein $k\in\SN$:}
+	\begin{alignat}{2}
+		\prod_{j=1}^{n-2} \integral{-\pi/2}{\pi/2}{\cos^j\alpha}{\alpha} &= \prod_{m=1}^{k-1} \integral{-\pi/2}{\pi/2}{\cos^{2m-1}\alpha}{\alpha} \integral{-\pi/2}{\pi/2}{\cos^{2m}\alpha}{\alpha} \nonumber \\
+		&= \dfrac{\pi^{k-1}}{(k-1)!} \nonumber
+	\end{alignat}
+
+	Damit wurden nun die unbekannten Faktoren in den gesuchten Gleichungen bestimmt.
+	Das allgemeine Volumen und der allgemeine Oberflächeninhalt folgt nun durch Einsetzen.
+	\begin{alignat}{2}
+		V &=
+		\begin{cases}
+			\frac{\pi^k}{k!}R^n & :n=2k, k\in\SN \\
+			2^{k}\pi^{k-1}R^n \prod_{m=1}^{k-1} \frac{1}{2m+1} & :n=2k-1, k\in\SN \\
+		\end{cases}
+		\nonumber \\
+		A &=
+		\begin{cases}
+			\frac{2\pi^k}{(k-1)!}R^{n-1} & :n=2k, k\in\SN \\
+			2^{k}\pi^{k-1}R^{n-1} \prod_{m=1}^{k-2} \frac{1}{2m+1} & :n=2k-1, k\in\SN \\
+		\end{cases}
+		\nonumber
+	\end{alignat}
+	\newpage
+	Sei nun $R>\varepsilon > 0$.
+	Dann besitzt die äußere Kugelschale mit der Schichtdicke $\varepsilon$ das Volumen $\Delta V$, wenn $\xi$ die Funktion der Vorfaktoren des Volumens darstellt.
+	\begin{alignat}{2}
+		&\Delta V &&= \xi(n) \boxb{ R^n - (R-\varepsilon)^n } \nonumber \\
+		\Rightarrow &\frac{\Delta V}{V} &&= 1 - \underbrace{\curvb{ 1-\frac{\varepsilon}{R} }^n }_{\mathclap{\longrightarrow 0, n\longrightarrow \infty}} \longrightarrow 1, \ n\longrightarrow\infty \nonumber
+	\end{alignat}
+	Damit befindet sich für große Dimensionen $n$ und für alle $\varepsilon>0$ fast das gesamte Volumen in der äußeren Schale.
+
+% subsection aufgabe_1 (end)

@@ -1,0 +1,33 @@
+\subsection*{Aufgabe 3} % (fold)
+\label{sub:aufgabe_3}
+
+	Seien $n\in\SN$ die Anzahl der Tage, an denen Personen Geburtstag haben können, und $k\in\SN$ mit $k<n$ die Anzahl der betrachteten Personen.
+	Nimmt man die Gleichverteilung für Geburtstage an, so folgt für das Wahrscheinlichkeitsmaß
+	\footnote{Der Wahrscheinlichkeitsraum soll hier nicht genauer angegeben werden.}
+	\[ P:\SP\curvb{ \curlb{1,\ldots,n}^k }\longrightarrow [0,1] ,\qquad P((n_1,\ldots,n_k)) = \frac{1}{n^k} \]
+	Das komplementäre Ereignis von 
+	\[ \textit{Mindestens zwei Personen haben am gleichen Tag Geburtstag.} \]
+	ist
+	\[ \textit{Alle Personen haben an verschiedenen Tagen Geburtstag.} \]
+	Dieses komplementäre Ereignis kann gerade durch folgende Menge beschrieben werden.
+	$$ A:=\set{ (n_1,\ldots,n_k)\in\curlb{1,\ldots,n}^k }{ n_i \neq n_j \textit{ für alle } i,j\in\curlb{1,\ldots,k},i\neq j } $$
+	Um nun die Anzahl der Elemente von $A$ zu bestimmen, bestimmt man induktiv die Anzahl der Möglichkeiten der einzelnen $n_i$.
+	Beginnt man der Benennung entsprechend mit $n_1$, so können dessen Werte beliebig gewählt werden, da die anderen Werte noch nicht festgelegt wurden.
+	Damit gibt es für $n_1$ also $n$ Möglichkeiten.
+	Folglich kann aber $n_2$ nicht mehr beliebig gewählt werden, weil bereits $n_1$ einen der beliebigen $n$ Werte angenommen hat.
+	Für $n_2$ gibt es also genau eine Lösung weniger und damit genau $n-1$ Möglichkeiten.
+	Wählt man nun ein ganzzahliges $i<k$, sodass die Anzahl der Möglichkeiten für $n_i$ bekannt ist und mit $N_i$ bezeichnet wird, dann müssen sich die Möglichkeiten für $n_{i+1}$ durch $N_i -1$ ergeben, da durch $n_i$ einer der noch möglichen $N_i$ Werte besetzt wird.
+	Die Anzahl der Gesamtmöglichkeiten ergibt sich dann durch Multiplikation der induktiv bestimmten Werte.
+	$$ \#A = n\cdot(n-1)\cdot(n-2)\cdot\cdots\cdot(n-k+2)\cdot(n-k+1) = \frac{n!}{(n-k)!} $$
+	Es folgt dann
+	$$ P(A) = \frac{\#A}{n^k} = \frac{n!}{n^k(n-k)!} $$
+	Nach Gesetzen der Wahrscheinlichkeitsrechnung  ergibt sich dann die Wahrscheinlichkeit des eigentlichen Ereignisses durch
+	$$ \boxed{P(A^c) = 1- \frac{n!}{n^k(n-k)!}} $$
+	\begin{description}
+		\item[$n=365,k=20$:]
+			$$ P(A^c) \approx 0.411 $$
+		\item[$n=365,k=60$:]
+			$$ P(A^c) \approx 0.994 $$ 
+	\end{description}
+
+% subsection aufgabe_3 (end)
